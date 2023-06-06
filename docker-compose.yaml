@@ -1,0 +1,30 @@
+services:
+  pulsar:
+    networks:
+      - otel
+    image: apachepulsar/pulsar-standalone:2.8.4
+    ports:
+      - 6650:6650
+      - 8081:8080
+    volumes:
+      - pulsar-data-volume:/pulsar/data
+
+  app:
+    networks:
+      - otel
+    image: pulsar-otel:0.0.1-SNAPSHOT
+    environment:
+      - POD_NAME=${USER}.local
+      - OTEL_JAVAAGENT_LOGGING=simple
+      - OTEL_JAVAAGENT_DEBUG=true
+    depends_on:
+      - pulsar
+    ports:
+      - 9083:8080
+
+volumes:
+  pulsar-data-volume:
+
+networks:
+  otel:
+    name: otel

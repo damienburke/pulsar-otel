@@ -1,0 +1,6 @@
+app:
+  pulsar:
+    topic: persistent://public/default/otel-topic
+    topic2: persistent://public/default/otel-topic2
+    client:
+      url: pulsar://pulsar:6650

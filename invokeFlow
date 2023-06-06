@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -vvv -X POST "http://localhost:9083/restyFlow"
